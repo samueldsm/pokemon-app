@@ -16,11 +16,11 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <div className="flex justify-center mt-4">
       <NextUIPagination
-        total={totalPages}
-        initialPage={currentPage}
-        onChange={onPageChange}
         showControls
+        initialPage={currentPage}
         size="sm"
+        total={totalPages}
+        onChange={onPageChange}
       />
     </div>
   );

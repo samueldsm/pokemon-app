@@ -1,6 +1,6 @@
 export const signIn = async (
   username: string,
-  password: string
+  password: string,
 ): Promise<void> => {
   // Simulate authentication
   if (username === "user" && password === "password") {
