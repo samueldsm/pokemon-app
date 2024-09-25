@@ -2,34 +2,25 @@
 import {
   Navbar as NextUINavbar,
   NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
-  NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
-import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
-import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { signOut, isAuthenticated, signIn } from "@/utils/auth";
-import { redirect, useRouter } from "next/navigation";
-import { Logo } from "@/components/icons";
-import { ThemeSwitch } from "@/components/theme-switch";
 
-const userLogged = isAuthenticated();
+import { useEffect, useState } from "react";
+import { signOut, isAuthenticated } from "@/utils/auth";
+import { useRouter } from "next/navigation";
+import { Logo } from "@/components/icons";
+import { ThemeSwitch } from "./theme-switch";
 
 export const Navbar = () => {
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(userLogged);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(userLogged);
-  }, [router, userLogged]);
+    setIsLoggedIn(isAuthenticated());
+  }, [router, isAuthenticated]);
 
   const handleLogout = () => {
     signOut();

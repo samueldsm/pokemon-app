@@ -1,4 +1,5 @@
-import { ChangeEvent, FC } from "react";
+"use client";
+import { ChangeEvent } from "react";
 
 import { CircularProgress } from "@nextui-org/progress";
 import { Input } from "@nextui-org/input";
@@ -21,6 +22,7 @@ const SearchBar = ({
       onChange={handleSearchChange}
       className="mb-4 w-2/3 sm:w-1/2"
       size="lg"
+      aria-label="search"
     />
   </div>
 );

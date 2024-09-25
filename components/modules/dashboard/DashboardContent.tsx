@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, FC, useEffect } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 
 import { useQuery } from "react-query";
@@ -37,16 +37,19 @@ const fetchPokemons = async (page: number, perPage: number, query: string) => {
 const DashboardContent: FC = () => {
   const { currentPage, searchQuery, setCurrentPage, setSearchQuery } =
     usePokemonSearch();
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     if (!isAuthenticated()) {
       redirect("/login");
     }
+    setIsClient(true);
   }, []);
 
   const { isLoading, error, data } = useQuery(
     ["pokemons", currentPage, ITEMS_PER_PAGE, searchQuery],
-    () => fetchPokemons(currentPage, ITEMS_PER_PAGE, searchQuery)
+    () => fetchPokemons(currentPage, ITEMS_PER_PAGE, searchQuery),
+    { enabled: isClient }
   );
 
   const handlePageChange = (page: number) => setCurrentPage(page);
