@@ -33,4 +33,5 @@ const PokemonGrid = ({ isLoading, data, error }: PokemonGridProps) => (
     {error && <p className="text-error">Error: {(error as Error).message}</p>}
   </div>
 );
+
 export default PokemonGrid;

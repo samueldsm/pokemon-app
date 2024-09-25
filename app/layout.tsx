@@ -1,6 +1,10 @@
 import { Metadata, Viewport } from "next";
+import "@/styles/globals.css";
+import clsx from "clsx";
+
 import { siteConfig } from "@/config/site";
 import RootLayoutClient from "@/components/ui/Layout/RootLayoutClient";
+import { fontSans } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -25,5 +29,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <RootLayoutClient>{children}</RootLayoutClient>;
+  return (
+    <html suppressHydrationWarning lang="en">
+      <head />
+      <body
+        className={clsx(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable,
+        )}
+      >
+        <RootLayoutClient>{children}</RootLayoutClient>
+      </body>
+    </html>
+  );
 }

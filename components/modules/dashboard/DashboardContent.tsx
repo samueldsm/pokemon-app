@@ -1,15 +1,14 @@
 "use client";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
-
 import { useQuery } from "react-query";
 import axios from "axios";
 
 import { isAuthenticated } from "@/utils/auth";
 import { usePokemonSearch } from "@/hooks/usePokemonSearch";
-
 import { Navbar } from "@/components/navbar";
 import Pagination from "@/components/common/Pagination/Pagination";
+
 import SearchBar from "./SearchBar/SearchBar";
 import PokemonGrid from "./PokemonGrid/PokemonGrid";
 
@@ -22,13 +21,13 @@ const fetchPokemons = async (page: number, perPage: number, query: string) => {
   });
 
   const filteredResults = response.data.results.filter((pokemon: any) =>
-    query ? pokemon.name.includes(query.toLowerCase()) : true
+    query ? pokemon.name.includes(query.toLowerCase()) : true,
   );
 
   const pokemonDetails = await Promise.all(
     filteredResults.map((pokemon: any) =>
-      axios.get(pokemon.url).then((res) => res.data)
-    )
+      axios.get(pokemon.url).then((res) => res.data),
+    ),
   );
 
   return { ...response.data, results: pokemonDetails };
@@ -49,7 +48,7 @@ const DashboardContent: FC = () => {
   const { isLoading, error, data } = useQuery(
     ["pokemons", currentPage, ITEMS_PER_PAGE, searchQuery],
     () => fetchPokemons(currentPage, ITEMS_PER_PAGE, searchQuery),
-    { enabled: isClient }
+    { enabled: isClient },
   );
 
   const handlePageChange = (page: number) => setCurrentPage(page);
@@ -65,11 +64,11 @@ const DashboardContent: FC = () => {
       <div className="container mx-auto sm:px-4 py-8">
         <h1 className="font-bold mb-4 text-4xl">Pokémons</h1>
         <SearchBar
+          handleSearchChange={handleSearchChange}
           isLoading={isLoading}
           searchQuery={searchQuery}
-          handleSearchChange={handleSearchChange}
         />
-        <PokemonGrid isLoading={isLoading} data={data} error={error} />
+        <PokemonGrid data={data} error={error} isLoading={isLoading} />
         <Pagination
           currentPage={currentPage}
           totalPages={Math.ceil(data?.count / ITEMS_PER_PAGE) || 0}

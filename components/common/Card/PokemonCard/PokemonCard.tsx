@@ -2,15 +2,16 @@
 import React, { useState } from "react";
 import { Card, CardBody, CardFooter } from "@nextui-org/card";
 import Image from "next/image";
-import { Pokemon } from "@/types";
 import { Skeleton } from "@nextui-org/skeleton";
+
+import { Pokemon } from "@/types";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
-  const { name, sprites, id, types, base_experience, height, weight } = pokemon;
+  const { name, sprites, types, base_experience, height, weight } = pokemon;
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -24,11 +25,11 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         )}
         <Image
           alt={name}
+          className="object-cover"
+          height={140}
+          loading="lazy"
           src={sprites?.front_default || "/assets/images/no_image.png"}
           width={200}
-          height={140}
-          className="object-cover"
-          loading="lazy"
           onLoadingComplete={() => setIsLoading(false)}
         />
       </CardBody>

@@ -1,10 +1,7 @@
 "use client";
 import { FC, FormEvent, useState } from "react";
-
 import { useRouter } from "next/navigation";
-
 import { z } from "zod";
-
 import { Input } from "@nextui-org/input";
 import { Spacer } from "@nextui-org/spacer";
 import { Button } from "@nextui-org/button";
@@ -53,29 +50,25 @@ const LoginContent: FC = () => {
           {error && <p className="text-red-500 mb-4">{error}</p>}
           <form onSubmit={handleSubmit}>
             <Input
-              type="text"
+              className="mb-4"
+              color="default"
               label="Username"
               placeholder="Enter your username"
+              size="lg"
+              type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="mb-4"
-              size="lg"
-              color="default"
             />
             <Spacer y={0.5} />
             <Input
-              label="Password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               className="mb-4"
-              size="lg"
+              color="default"
               endContent={
                 <button
+                  aria-label="toggle password visibility"
                   className="focus:outline-none"
                   type="button"
                   onClick={toggleVisibility}
-                  aria-label="toggle password visibility"
                 >
                   {isVisible ? (
                     <EyeSlashFilledIcon className="text-2xl text-white/80 pointer-events-none" />
@@ -84,13 +77,17 @@ const LoginContent: FC = () => {
                   )}
                 </button>
               }
+              label="Password"
+              placeholder="Enter your password"
+              size="lg"
               type={isVisible ? "text" : "password"}
-              color="default"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Spacer y={1} />
             <Button
-              type="submit"
               className="w-full bg-gradient-to-r from-indigo-500 to-purple-500"
+              type="submit"
             >
               Sign In
             </Button>
@@ -100,4 +97,5 @@ const LoginContent: FC = () => {
     </div>
   );
 };
+
 export default LoginContent;

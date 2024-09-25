@@ -7,11 +7,12 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import NextLink from "next/link";
-
 import { useEffect, useState } from "react";
-import { signOut, isAuthenticated } from "@/utils/auth";
 import { useRouter } from "next/navigation";
+
+import { signOut, isAuthenticated } from "@/utils/auth";
 import { Logo } from "@/components/icons";
+
 import { ThemeSwitch } from "./theme-switch";
 
 export const Navbar = () => {
@@ -45,7 +46,7 @@ export const Navbar = () => {
         <NavbarItem className="flex gap-2">
           <ThemeSwitch />
           {isLoggedIn && ( // Conditional rendering of Login/Logout button
-            <Button onClick={handleLogout} color="danger" variant="flat">
+            <Button color="danger" variant="flat" onClick={handleLogout}>
               Logout
             </Button>
           )}
