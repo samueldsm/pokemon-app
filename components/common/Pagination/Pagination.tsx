@@ -18,6 +18,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <NextUIPagination
         showControls
         initialPage={currentPage}
+        page={currentPage}
         size="sm"
         total={totalPages}
         onChange={onPageChange}

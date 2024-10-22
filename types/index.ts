@@ -4,6 +4,12 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+export interface IPokemonResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: Pokemon[];
+}
 export interface Pokemon {
   abilities: Ability[];
   base_experience: number;
