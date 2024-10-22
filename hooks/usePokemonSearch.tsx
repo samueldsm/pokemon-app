@@ -2,12 +2,12 @@ import { useState } from "react";
 
 export const usePokemonSearch = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [countPage, setCountPage] = useState(0);
 
   return {
+    countPage,
     currentPage,
-    searchQuery,
     setCurrentPage,
-    setSearchQuery,
+    setCountPage,
   };
 };
